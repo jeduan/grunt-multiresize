@@ -1,0 +1,42 @@
+{
+  "name": "grunt-multiresize",
+  "description": "Export multiple sizes from an image",
+  "version": "0.1.0",
+  "homepage": "https://github.com/jeduan/icons-yogome",
+  "author": {
+    "name": "Jeduan Cornejo",
+    "email": "jeduan@gmail.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/jeduan/icons-yogome.git"
+  },
+  "bugs": {
+    "url": "https://github.com/jeduan/icons-yogome/issues"
+  },
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "https://github.com/jeduan/icons-yogome/blob/master/LICENSE-MIT"
+    }
+  ],
+  "main": "Gruntfile.js",
+  "engines": {
+    "node": ">= 0.8.0"
+  },
+  "scripts": {
+    "test": "grunt test"
+  },
+  "devDependencies": {
+    "grunt-contrib-jshint": "~0.6.0",
+    "grunt-contrib-clean": "~0.4.0",
+    "grunt-contrib-nodeunit": "~0.2.0",
+    "grunt": "~0.4.1"
+  },
+  "peerDependencies": {
+    "grunt": "~0.4.1"
+  },
+  "keywords": [
+    "gruntplugin"
+  ]
+}
