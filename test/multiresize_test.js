@@ -33,16 +33,14 @@ exports.multiresize = {
 
     var expected = ['tmp/Icon-72.png', 'tmp/Icon-72@2x.png'];
 
-    var fileSize = function(file, callback) {
+    async.map(expected, function(file, callback) {
       gm(file).size(callback);
-    };
-
-    async.map(expected, fileSize, function(err, fileSizes){
+    }, function(err, dimensions){
       test.ok(err === null, 'there was an error getting file sizes');
-      test.equal(fileSizes[0].width, 72);
-      test.equal(fileSizes[0].height, 72);
-      test.equal(fileSizes[1].width, 114);
-      test.equal(fileSizes[1].height, 114);
+      test.equal(dimensions[0].width, 72);
+      test.equal(dimensions[0].height, 72);
+      test.equal(dimensions[1].width, 114);
+      test.equal(dimensions[1].height, 114);
       test.done();
     });
 

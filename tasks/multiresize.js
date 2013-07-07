@@ -37,12 +37,13 @@ module.exports = function(grunt) {
             folder = dest.substr(0, dest.lastIndexOf('/'));
 
         if (! grunt.file.exists(folder)) {
-          grunt.log.write('Creating folder "' + folder + '".');
+          grunt.log.ok('Creating folder "' + folder + '".');
           grunt.file.mkdir(folder);
         }
 
         gm(src).thumb(size[0], size[1], dest, 90, function(err){
           if(err) { return callback(err); }
+          grunt.log.ok('Created "' + dest + '".');
           callback(null);
         });
 
