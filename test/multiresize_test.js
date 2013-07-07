@@ -1,6 +1,8 @@
 'use strict';
 
-var grunt = require('grunt');
+var grunt = require('grunt'),
+    gm = require('gm'),
+    async = require('async');
 
 /*
   ======== A Handy Little Nodeunit Reference ========
@@ -24,25 +26,25 @@ var grunt = require('grunt');
 
 exports.multiresize = {
   setUp: function(done) {
-    // setup here if necessary
     done();
   },
-  default_options: function(test) {
-    test.expect(1);
+  resize: function(test) {
+    test.expect(5);
 
-    var actual = grunt.file.read('tmp/default_options');
-    var expected = grunt.file.read('test/expected/default_options');
-    test.equal(actual, expected, 'should describe what the default behavior is.');
+    var expected = ['tmp/Icon-72.png', 'tmp/Icon-72@2x.png'];
 
-    test.done();
-  },
-  custom_options: function(test) {
-    test.expect(1);
+    var fileSize = function(file, callback) {
+      gm(file).size(callback);
+    };
 
-    var actual = grunt.file.read('tmp/custom_options');
-    var expected = grunt.file.read('test/expected/custom_options');
-    test.equal(actual, expected, 'should describe what the custom option(s) behavior is.');
+    async.map(expected, fileSize, function(err, fileSizes){
+      test.ok(err === null, 'there was an error getting file sizes');
+      test.equal(fileSizes[0].width, 72);
+      test.equal(fileSizes[0].height, 72);
+      test.equal(fileSizes[1].width, 114);
+      test.equal(fileSizes[1].height, 114);
+      test.done();
+    });
 
-    test.done();
   },
 };

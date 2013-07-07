@@ -7,44 +7,55 @@
  */
 
 'use strict';
+var gm = require('gm'),
+    async = require('async');
 
 module.exports = function(grunt) {
 
   // Please see the Grunt documentation for more information regarding task
   // creation: http://gruntjs.com/creating-tasks
 
-  grunt.registerMultiTask('multiresize', 'Your task description goes here.', function() {
-    // Merge task-specific and/or target-specific options with these defaults.
-    var options = this.options({
-      punctuation: '.',
-      separator: ', '
-    });
+  grunt.registerMultiTask('multiresize', 'Allows to create multiple resized images from an image', function() {
+    var done = this.async();
 
-    // Iterate over all specified file groups.
-    this.files.forEach(function(f) {
-      // Concat specified files.
-      var src = f.src.filter(function(filepath) {
-        // Warn on and remove invalid source files (if nonull was set).
-        if (!grunt.file.exists(filepath)) {
-          grunt.log.warn('Source file "' + filepath + '" not found.');
-          return false;
-        } else {
-          return true;
+    async.each(this.files, function(f, next) {
+      var src, i = 0;
+
+      //Ignores all but first src file
+      if (f.src.length >= 1) {
+        src = f.src[0];
+      } else {
+        return next();
+      }
+
+      if (!grunt.file.exists(src)) {
+        return next(new Error('Source file "'+ src +'" not found.'));
+      }
+
+      async.map(f.dest, function(dest, callback) {
+        var size = f.destSizes[i++].split('x'),
+            folder = dest.substr(0, dest.lastIndexOf('/'));
+
+        if (! grunt.file.exists(folder)) {
+          grunt.log.write('Creating folder "' + folder + '".');
+          grunt.file.mkdir(folder);
         }
-      }).map(function(filepath) {
-        // Read file source.
-        return grunt.file.read(filepath);
-      }).join(grunt.util.normalizelf(options.separator));
 
-      // Handle options.
-      src += options.punctuation;
+        gm(src).thumb(size[0], size[1], dest, 90, function(err){
+          if(err) { return callback(err); }
+          callback(null);
+        });
 
-      // Write the destination file.
-      grunt.file.write(f.dest, src);
+      }, next);
 
-      // Print a success message.
-      grunt.log.writeln('File "' + f.dest + '" created.');
+    }, function(err) {
+      if(err) {
+        grunt.log.error(err.message);
+        return done(false);
+      }
+      done();
     });
+
   });
 
 };

@@ -3,7 +3,11 @@
 > Export multiple sizes from an image
 
 ## Getting Started
-This plugin requires Grunt `~0.4.1`
+This plugin requires GraphicsMagick and Grunt `~0.4.1`
+
+First download and install [GraphicsMagick](http://www.graphicsmagick.org/). In Mac OS X, you can simply use [Homebrew](http://mxcl.github.io/homebrew/) and do:
+
+    brew install graphicsmagick
 
 If you haven't used [Grunt](http://gruntjs.com/) before, be sure to check out the [Getting Started](http://gruntjs.com/getting-started) guide, as it explains how to create a [Gruntfile](http://gruntjs.com/sample-gruntfile) as well as install and use Grunt plugins. Once you're familiar with that process, you may install this plugin with this command:
 
@@ -25,59 +29,51 @@ In your project's Gruntfile, add a section named `multiresize` to the data objec
 ```js
 grunt.initConfig({
   multiresize: {
-    options: {
-      // Task-specific options go here.
-    },
-    your_target: {
-      // Target-specific file lists and/or options go here.
-    },
+    target: {
+      src: 'path/to/source',
+      dest: ['path/to/dest1', '/path/to/dest2'],
+      destSizes: ['72x72', '114x114']
+    }
   },
 })
 ```
 
 ### Options
 
-#### options.separator
+#### options.src
 Type: `String`
-Default value: `',  '`
 
-A string value that is used to do something with whatever.
+The original file to be resized
 
-#### options.punctuation
-Type: `String`
-Default value: `'.'`
+#### options.dest
+Type: `String` or `Array`
 
-A string value that is used to do something else with whatever else.
+The files to be written by this script
+
+#### options.destSizes
+Type: `Array`
+
+The image dimensions expected
 
 ### Usage Examples
 
-#### Default Options
-In this example, the default options are used to do something with whatever. So if the `testing` file has the content `Testing` and the `123` file had the content `1 2 3`, the generated result would be `Testing, 1 2 3.`
+#### Outputting all icons
+This project was originally created to resize our project icons to conform to
+CoronaSDK spec. This is our config file.
 
 ```js
 grunt.initConfig({
   multiresize: {
-    options: {},
-    files: {
-      'dest/default_options': ['src/testing', 'src/123'],
+    iOS: {
+      src: 'orig/Icon-512.png',
+      dest: ['Icon.png', 'Icon@2x.png', 'Icon-72.png', 'Icon-72@2x.png'],
+      destSizes: ['57x57', '114x114', '72x72', '144x144']
     },
-  },
-})
-```
-
-#### Custom Options
-In this example, custom options are used to do something else with whatever else. So if the `testing` file has the content `Testing` and the `123` file had the content `1 2 3`, the generated result in this case would be `Testing: 1 2 3 !!!`
-
-```js
-grunt.initConfig({
-  multiresize: {
-    options: {
-      separator: ': ',
-      punctuation: ' !!!',
-    },
-    files: {
-      'dest/default_options': ['src/testing', 'src/123'],
-    },
+    Android: {
+      src: 'orig/Icon-Android-512.png',
+      dest: ['Icon-ldpi.png', 'Icon-mdpi.png', 'Icon-hdpi.png', 'Icon-xhdpi.png'],
+      destSizes: ['36x36', '48x48', '72x72', '96x96']
+    }
   },
 })
 ```
@@ -86,4 +82,4 @@ grunt.initConfig({
 In lieu of a formal styleguide, take care to maintain the existing coding style. Add unit tests for any new or changed functionality. Lint and test your code using [Grunt](http://gruntjs.com/).
 
 ## Release History
-_(Nothing yet)_
+v0.1.0: Initial release

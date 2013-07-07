@@ -1,6 +1,6 @@
 /*
  * grunt-multiresize
- * https://github.com/jeduan/icons-yogome
+ * https://github.com/jeduan/grunt-multiresize
  *
  * Copyright (c) 2013 Jeduan Cornejo
  * Licensed under the MIT license.
@@ -30,22 +30,11 @@ module.exports = function(grunt) {
 
     // Configuration to be run (and then tested).
     multiresize: {
-      default_options: {
-        options: {
-        },
-        files: {
-          'tmp/default_options': ['test/fixtures/testing', 'test/fixtures/123'],
-        },
-      },
-      custom_options: {
-        options: {
-          separator: ': ',
-          punctuation: ' !!!',
-        },
-        files: {
-          'tmp/custom_options': ['test/fixtures/testing', 'test/fixtures/123'],
-        },
-      },
+      icon: {
+        src: 'test/fixtures/Icon-512.png',
+        dest: ['tmp/Icon-72.png', 'tmp/Icon-72@2x.png'],
+        destSizes: ['72x72', '114x114']
+      }
     },
 
     // Unit tests.
