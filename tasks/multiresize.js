@@ -18,6 +18,7 @@ module.exports = function(grunt) {
   grunt.registerMultiTask('multiresize', 'Allows to create multiple resized images from an image', function() {
     var done = this.async();
 
+    var toStr = Object.prototype.toString
     async.each(this.files, function(f, next) {
       var src, i = 0;
 
@@ -30,6 +31,14 @@ module.exports = function(grunt) {
 
       if (!grunt.file.exists(src)) {
         return next(new Error('Source file "'+ src +'" not found.'));
+      }
+
+      if (toStr.call(f.dest) !== '[object Array]') {
+        f.dest = [f.dest];
+      }
+
+      if (toStr.call(f.destSizes) !== '[object Array]') {
+        f.destSizes = [f.destSizes];
       }
 
       async.map(f.dest, function(dest, callback) {
