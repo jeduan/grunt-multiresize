@@ -17,8 +17,9 @@ module.exports = function(grunt) {
 
   grunt.registerMultiTask('multiresize', 'Allows to create multiple resized images from an image', function() {
     var done = this.async();
+    var options = this.options({quality: 100});
 
-    var toStr = Object.prototype.toString
+    var toStr = Object.prototype.toString;
     async.each(this.files, function(f, next) {
       var src, i = 0;
 
@@ -50,7 +51,7 @@ module.exports = function(grunt) {
           grunt.file.mkdir(folder);
         }
 
-        gm(src).thumb(size[0], size[1], dest, 90, function(err){
+        gm(src).thumb(size[0], size[1], dest, options.quality, function(err){
           if(err) { return callback(err); }
           grunt.log.ok('Created "' + dest + '".');
           callback(null);
