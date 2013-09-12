@@ -40,7 +40,7 @@
     "gruntplugin"
   ],
   "dependencies": {
-    "gm": "~1.10.0",
+    "gm": "~1.13.0",
     "async": "~0.2.9"
   }
 }
