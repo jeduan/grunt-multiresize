@@ -1,7 +1,7 @@
 {
   "name": "grunt-multiresize",
   "description": "Export multiple sizes from an image",
-  "version": "0.2.1",
+  "version": "0.3.0",
   "homepage": "https://github.com/jeduan/grunt-multiresize",
   "author": {
     "name": "Jeduan Cornejo",
