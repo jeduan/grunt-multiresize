@@ -34,6 +34,10 @@ module.exports = function(grunt) {
         src: 'test/fixtures/Icon-512.png',
         dest: ['tmp/Icon-72.png', 'tmp/Icon-72@2x.png'],
         destSizes: ['72x72', '114x114']
+      },
+      retina: {
+        src: 'test/fixtures/Image@2x.png',
+        dest: ['tmp/Image.png']
       }
     },
 

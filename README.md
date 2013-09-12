@@ -53,7 +53,7 @@ The files to be written by this script
 #### options.destSizes
 Type: `Array`
 
-The image dimensions expected
+The image dimensions expected. The format can be `witdhxheight` or `n%`
 
 ### Usage Examples
 

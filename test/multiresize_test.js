@@ -45,4 +45,17 @@ exports.multiresize = {
     });
 
   },
+  retina: function (test) {
+    test.expect(3);
+    var expected = ['tmp/Image.png'];
+
+    async.map(expected, function(file, callback){
+      gm(file).size(callback);
+    }, function(err, dimensions){
+      test.ok(err === null, 'there was an error getting file');
+      test.equal(dimensions[0].width, 256);
+      test.equal(dimensions[0].height, 256);
+      test.done();
+    });
+  }
 };
