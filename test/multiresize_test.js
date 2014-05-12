@@ -36,7 +36,7 @@ exports.multiresize = {
     async.map(expected, function(file, callback) {
       gm(file).size(callback);
     }, function(err, dimensions){
-      test.ok(err === null, 'there was an error getting file sizes');
+      test.ok(!err, 'there was an error getting file sizes');
       test.equal(dimensions[0].width, 72);
       test.equal(dimensions[0].height, 72);
       test.equal(dimensions[1].width, 114);
@@ -52,7 +52,7 @@ exports.multiresize = {
     async.map(expected, function(file, callback){
       gm(file).size(callback);
     }, function(err, dimensions){
-      test.ok(err === null, 'there was an error getting file');
+      test.ok(!err, 'there was an error getting file');
       test.equal(dimensions[0].width, 256);
       test.equal(dimensions[0].height, 256);
       test.done();
