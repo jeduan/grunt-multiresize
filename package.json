@@ -1,7 +1,7 @@
 {
   "name": "grunt-multiresize",
   "description": "Export multiple sizes from an image",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "homepage": "https://github.com/jeduan/grunt-multiresize",
   "author": {
     "name": "Jeduan Cornejo",
@@ -28,19 +28,19 @@
     "test": "grunt test"
   },
   "devDependencies": {
-    "grunt-contrib-jshint": "~0.6.0",
-    "grunt-contrib-clean": "~0.4.0",
-    "grunt-contrib-nodeunit": "~0.2.0",
-    "grunt": "~0.4.1"
+    "grunt-contrib-jshint": "~0.10.0",
+    "grunt-contrib-clean": "~0.5.0",
+    "grunt-contrib-nodeunit": "~0.3.0",
+    "grunt": "~0.4.5"
   },
   "peerDependencies": {
-    "grunt": "~0.4.1"
+    "grunt": "~0.4.5"
   },
   "keywords": [
     "gruntplugin"
   ],
   "dependencies": {
-    "gm": "~1.13.0",
-    "async": "~0.2.9"
+    "gm": "~1.16.0",
+    "async": "~0.8.0"
   }
 }
