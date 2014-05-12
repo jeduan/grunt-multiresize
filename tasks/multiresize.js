@@ -82,12 +82,17 @@ module.exports = function(grunt) {
               });
             }
           }, function (width, height, step) {
-            gm(src).thumb(width, height, dest, options.quality, function(err){
-              if(err) { return step(err); }
+            gm(src)
+              .resize(width, height, '^>')
+              .gravity('Center')
+              .quality(options.quality)
+              .crop(width, height)
+              .write(dest, function(err){
+                if(err) { return step(err); }
 
-              grunt.log.ok('Created "' + dest + '".');
-              step(null);
-            });
+                grunt.log.ok('Created "' + dest + '".');
+                step(null);
+              });
           }
         ], nextMap);
       }, nextFile);
@@ -101,5 +106,4 @@ module.exports = function(grunt) {
     });
 
   });
-
 };
