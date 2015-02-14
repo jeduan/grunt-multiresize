@@ -17,7 +17,7 @@ module.exports = function(grunt) {
 
   grunt.registerMultiTask('multiresize', 'Allows to create multiple resized images from an image', function() {
     var finishTask = this.async();
-    var options = this.options({quality: 100});
+    var options = this.options({quality: 100, background: 'transparent'});
 
     var isRetina2x = function(imagePath) {
       var i = imagePath.lastIndexOf('.');
@@ -87,6 +87,7 @@ module.exports = function(grunt) {
               .gravity('Center')
               .quality(options.quality)
               .crop(width, height)
+              .background(options.background)
               .write(dest, function(err){
                 if(err) { return step(err); }
 

@@ -38,22 +38,34 @@ grunt.initConfig({
 })
 ```
 
-### Options
+### Task
 
-#### options.src
+#### src
 Type: `String`
 
-The original file to be resized
+The original file to be resized.
 
-#### options.dest
+#### dest
 Type: `String` or `Array`
 
-The files to be written by this script
+The files to be written by this script.
 
-#### options.destSizes
+#### destSizes
 Type: `Array`
 
-The image dimensions expected. The format can be `witdhxheight` or `n%`
+The image dimensions expected. The format can be `witdhxheight` or `n%`.
+
+### Options
+
+#### options.background
+Type: `String`
+
+Background color, default `transparent`. The format described [here](http://www.graphicsmagick.org/GraphicsMagick.html#details-fill).
+
+#### options.quality
+Type: `String`
+
+Quality of output image, default `100`.
 
 ### Usage Examples
 
@@ -70,6 +82,9 @@ grunt.initConfig({
       destSizes: ['57x57', '114x114', '72x72', '144x144']
     },
     Android: {
+      options: {
+        background: '#ffffff'
+      },
       src: 'orig/Icon-Android-512.png',
       dest: ['Icon-ldpi.png', 'Icon-mdpi.png', 'Icon-hdpi.png', 'Icon-xhdpi.png'],
       destSizes: ['36x36', '48x48', '72x72', '96x96']
