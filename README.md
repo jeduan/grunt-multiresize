@@ -5,9 +5,15 @@
 ## Getting Started
 This plugin requires GraphicsMagick and Grunt `~0.4.1`
 
-First download and install [GraphicsMagick](http://www.graphicsmagick.org/). In Mac OS X, you can simply use [Homebrew](http://mxcl.github.io/homebrew/) and do:
+First download and install [GraphicsMagick](http://www.graphicsmagick.org/).
+
+# On Mac OS X, you can simply use [Homebrew](http://mxcl.github.io/homebrew/) and do:
 
     brew install graphicsmagick
+
+# On Linux, you can simply use APT and do:
+
+    apt-get install graphicsmagick
 
 If you haven't used [Grunt](http://gruntjs.com/) before, be sure to check out the [Getting Started](http://gruntjs.com/getting-started) guide, as it explains how to create a [Gruntfile](http://gruntjs.com/sample-gruntfile) as well as install and use Grunt plugins. Once you're familiar with that process, you may install this plugin with this command:
 
