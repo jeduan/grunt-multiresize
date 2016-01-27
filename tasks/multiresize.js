@@ -17,7 +17,7 @@ module.exports = function(grunt) {
 
   grunt.registerMultiTask('multiresize', 'Allows to create multiple resized images from an image', function() {
     var finishTask = this.async();
-    var options = this.options({quality: 100, background: 'transparent'});
+    var options = this.options({quality: 100, background: 'transparent', limit: 100});
 
     var isRetina2x = function(imagePath) {
       var i = imagePath.lastIndexOf('.');
@@ -27,7 +27,7 @@ module.exports = function(grunt) {
       return false;
     };
 
-    async.each(this.files, function(f, nextFile) {
+    async.eachLimit(this.files, options.limit, function(f, nextFile) {
       var src, i = 0;
 
       //Ignores all but first src file
